@@ -21,8 +21,12 @@
 # and last chars of the string are the same.
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
-  # +++your code here+++
-  return
+  matchingWords = 0
+  for word in words:
+    if len(word)>1:
+      if word[0]==word[-1]:
+	matchingWords += 1
+  return matchingWords
 
 
 # B. front_x
@@ -32,9 +36,15 @@ def match_ends(words):
 # ['xanadu', 'xyz', 'aardvark', 'apple', 'mix']
 # Hint: this can be done by making 2 lists and sorting each of them
 # before combining them.
+def front_compare(word):
+  if word[0]=='x':
+    return ' '+word
+  else:
+    return 'Z'+word
+
 def front_x(words):
   # +++your code here+++
-  return
+  return sorted(words, key = front_compare)
 
 
 
