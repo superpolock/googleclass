@@ -41,11 +41,25 @@ import sys
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
+def split_words(filename):
+  f = open(filename,"r")
+  returnDict = {}
+  for lines in f:
+    for word in lines.split():
+      if word in returnDict:
+        returnDict[word] += 1
+      else:
+        returnDict[word] = 1
+  return returnDict
+
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
+def print_words(filename):
+  print sorted(split_words(filename).items(),key=lambda wordcount: wordcount[1], reverse=True)
 
-###
+def print_top(filename):
+  print split_words(filename)
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
