@@ -64,7 +64,19 @@ def main():
   # +++your code here+++
   # Call your functions
   for directory in args:
-    print getSpecialFiles(directory) 
+    matchingFiles = getSpecialFiles(directory) 
+    if tozip:
+      commandLineToExecute = "zip -j "+tozip+matchingFiles.join(" ")
+      print "Gonna run: "+commandLineToExecute
+    elif todir:
+      # todo: Need to create the direcotry if it doesn't exist
+      for filename in matchingFiles:
+        commandLineToExecute = "cp "+filename +" "+todir
+        print "Executing '"+commandLineToExecute+"'"
+        (status, output) = commands.getstatusoutput(commandLineToExecute)
+        print "Status: "+str(status)
+        print "Output: "+output
+        
 
 if __name__ == "__main__":
   main()
