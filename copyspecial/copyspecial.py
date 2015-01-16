@@ -17,8 +17,21 @@ import commands
 
 # +++your code here+++
 # Write functions and modify main() to call them
-
-
+def getSpecialFiles(dir):
+  specialFiles = []
+  commandToExecute = "ls -1 "+dir
+  print "About to execute: " + commandToExecute
+  (status, filenames) = commands.getstatusoutput(commandToExecute)
+  print "filenames",filenames
+  print "status",status
+  if 0 == status:
+    for filename in filenames.split('\n'):
+      print "Testing filename: ",filename
+      match = re.search("__\w+__",filename)
+      if match:
+        print "Matched",match.group()
+        specialFiles.append(filename)
+  return specialFiles
 
 def main():
   # This basic command line argument parsing code is provided.
@@ -50,6 +63,8 @@ def main():
 
   # +++your code here+++
   # Call your functions
-  
+  for directory in args:
+    print getSpecialFiles(directory) 
+
 if __name__ == "__main__":
   main()
